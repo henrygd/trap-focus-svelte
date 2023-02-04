@@ -1,0 +1,58 @@
+{
+	"name": "trap-focus-svelte",
+	"version": "0.1.0",
+	"license": "MIT",
+	"description": "Small 0.4kB focus trap that supports stacking, toggling, and custom scope",
+	"keywords": [
+		"focus",
+		"focus trap",
+		"focus lock",
+		"svelte"
+	],
+	"author": "Hank Dollman <hank@henrygd.me> (https://henrygd.me)",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/henrygd/trap-focus-svelte.git"
+	},
+	"bugs": {
+		"url": "https://github.com/henrygd/trap-focus-svelte/issues"
+	},
+	"homepage": "https://trap-focus-svelte.henrygd.me",
+	"type": "module",
+	"source": "index.ts",
+	"exports": {
+		".": {
+			"import": "./dist/trap-focus-svelte.svelte.js",
+			"require": "./dist/trap-focus-svelte.cjs",
+			"default": "./dist/trap-focus-svelte.svelte.js"
+		},
+		"./svelte": "./dist/trap-focus-svelte.svelte.js",
+		"./vanilla": "./dist/trap-focus-svelte.mjs"
+	},
+	"svelte": "./dist/trap-focus-svelte.svelte.js",
+	"mangle": {
+		"regex": "^lastActiveElement$"
+	},
+	"scripts": {
+		"build": "run-p build-cjs build-module build-svelte && sed -i 's/Promise.resolve();//' dist/*",
+		"build-cjs": "microbundle -i index.ts -o ./dist/trap-focus-svelte.cjs.js --no-pkg-main -f cjs --sourcemap false",
+		"build-module": "microbundle -i index.ts -o ./dist/trap-focus-svelte.mjs --no-pkg-main -f modern --sourcemap false",
+		"build-svelte": "microbundle -i index.ts -o ./dist/trap-focus-svelte.svelte.js --no-pkg-main -f modern --external svelte --sourcemap false",
+		"dev": "vite demo",
+		"demo-build": "vite build demo",
+		"preview": "vite demo preview",
+		"check": "svelte-check --tsconfig ./tsconfig.json"
+	},
+	"devDependencies": {
+		"@sveltejs/vite-plugin-svelte": "^2.0.2",
+		"@tsconfig/svelte": "^3.0.0",
+		"hide-show-scroll": "^2.0.0",
+		"microbundle": "^0.15.1",
+		"npm-run-all": "^4.1.5",
+		"svelte": "^3.55.1",
+		"svelte-check": "^2.10.3",
+		"tslib": "^2.5.0",
+		"typescript": "^4.9.3",
+		"vite": "^4.1.0"
+	}
+}
