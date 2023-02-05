@@ -1,12 +1,8 @@
-interface TrapOptions {
-    /** enables or disables wrap */
-    active?: boolean;
-    /** wrapper element */
-    wrap?: HTMLElement;
-}
 /** Traps focus within a wrapper element */
-declare function trapFocus(node: HTMLElement, options?: TrapOptions): {
-    update(options: TrapOptions): void;
+declare function trapFocus(wrap: HTMLElement, active?: boolean): {
+    /** Enables / disables trap */
+    update(active: boolean): void;
+    /** Destroys trap and removes event listeners */
     destroy(): void;
 };
 export { trapFocus };
