@@ -1,11 +1,5 @@
 import { listen } from 'svelte/internal'
 
-interface StackData {
-	wrap: HTMLElement
-	/** previous document.activeElement (used to restore focus) */
-	lastActiveElement: HTMLElement
-}
-
 interface TrapOptions {
 	/** enables or disables wrap */
 	active?: boolean
@@ -13,7 +7,7 @@ interface TrapOptions {
 	wrap?: HTMLElement
 }
 
-let stack: StackData[] = []
+let stack: HTMLElement[] = []
 
 // true if tabbing backwards with shift + tab
 let shiftTab = false
@@ -22,7 +16,7 @@ listen(document, 'keydown', (e: KeyboardEvent) => {
 	shiftTab = e.shiftKey && e.key === 'Tab'
 })
 
-/** Locks focus within a wrapper element */
+/** Traps focus within a wrapper element */
 function trapFocus(node: HTMLElement, options: TrapOptions = { active: true }) {
 	let { wrap = node, active } = options
 
@@ -32,12 +26,10 @@ function trapFocus(node: HTMLElement, options: TrapOptions = { active: true }) {
 
 	const firstFocusableEl = focusableEls.at(0) ?? wrap
 	const lastFocusableEl = focusableEls.at(-1) ?? wrap
+	const lastActiveElement = document.activeElement as HTMLElement
 
 	// add to stack
-	stack.push({
-		wrap,
-		lastActiveElement: document.activeElement as HTMLElement,
-	})
+	stack.push(wrap)
 
 	// set initial focus on first focusable el
 	firstFocusableEl.focus()
@@ -76,8 +68,9 @@ function trapFocus(node: HTMLElement, options: TrapOptions = { active: true }) {
 			focusListener()
 			firstElBlurListener()
 			lastElBlurListener()
-			// focus previously focused element
-			stack.pop().lastActiveElement.focus()
+			// remove from stack & focus previously focused element
+			stack = stack.filter((el) => el !== wrap)
+			lastActiveElement.focus()
 		},
 	}
 }
