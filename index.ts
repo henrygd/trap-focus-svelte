@@ -43,27 +43,25 @@ function trapFocus(node: HTMLElement, options: TrapOptions = { active: true }) {
 	firstFocusableEl.focus()
 
 	/** true if element is in the last trap added to stack */
-	function inCurrentStack(el: HTMLElement = wrap) {
-		return stack.at(-1).wrap.contains(el)
-	}
+	const inCurrentTrap = (el: HTMLElement = wrap) => stack.at(-1).contains(el)
 
 	// use blur listeners to redirect focus before it leaves container\
 	/** focus last element if focus leaves first element with shift */
 	const firstElBlurListener = listen(firstFocusableEl, 'blur', () => {
-		if (active && inCurrentStack()) {
+		if (active && inCurrentTrap()) {
 			shiftTab && lastFocusableEl.focus()
 		}
 	})
 	/** focus first element if focus leaves last element without shift */
 	const lastElBlurListener = listen(lastFocusableEl, 'blur', () => {
-		if (active && inCurrentStack()) {
+		if (active && inCurrentTrap()) {
 			!shiftTab && firstFocusableEl.focus()
 		}
 	})
 
 	/** listener for focus event, moves focus to container if away */
 	const focusListener = listen(document, 'focusin', (e: FocusEvent) => {
-		if (active && !inCurrentStack(e.target as HTMLElement)) {
+		if (active && !inCurrentTrap(e.target as HTMLElement)) {
 			let focusEl = shiftTab ? lastFocusableEl : firstFocusableEl
 			focusEl.focus()
 		}
