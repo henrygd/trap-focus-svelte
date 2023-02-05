@@ -4,7 +4,7 @@ interface TrapOptions {
     /** wrapper element */
     wrap?: HTMLElement;
 }
-/** Locks focus within a wrapper element */
+/** Traps focus within a wrapper element */
 declare function trapFocus(node: HTMLElement, options?: TrapOptions): {
     update(options: TrapOptions): void;
     destroy(): void;
