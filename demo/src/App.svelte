@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { trapFocus } from '../../dist/trap-focus-svelte.svelte'
+	import { trapFocus } from '../../index'
 	import Dialog from './lib/dialog.svelte'
 
 	let trapActive = true
@@ -18,13 +18,13 @@
 <main>
 	<h1>a focus trap for svelte</h1>
 	<p>
-		Small 0.4kB focus trap that supports stacking, toggling, and custom scope. You may <a
+		Small 0.4kB focus trap that supports stacking, toggling, and dynamic content. You may <a
 			href="https://github.com/henrygd/trap-focus-svelte">view this project on GitHub</a
 		>
 		by disabling the active focus trap.
 	</p>
 
-	<div use:trapFocus={{ active: trapActive }}>
+	<div use:trapFocus={trapActive}>
 		<div class="btns">
 			<button on:click={toggleTrap}>Toggle Trap ({trapActive ? 'Enabled' : 'Disabled'})</button>
 			<button on:click={toggleDialog}>Open Modal</button>

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { listen } from 'svelte/internal'
 	import { fade, fly } from 'svelte/transition'
-	import { trapFocus } from '../../../dist/trap-focus-svelte.svelte'
+	import { trapFocus } from '../../../index'
 
 	export let toggleDialog
 
