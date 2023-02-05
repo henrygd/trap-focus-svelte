@@ -4,17 +4,19 @@ Small 0.4kB focus trap that supports stacking, toggling, and custom scope. Desig
 
 Demo: https://trap-focus-svelte.henrygd.me
 
-Example: ADD STACKBLITZ EXAMPLE
+Svelte example: https://stackblitz.com/edit/vitejs-vite-k328kh?file=src/App.svelte
+
+Vanilla example with TypeScript: https://stackblitz.com/edit/vitejs-vite-sesxte?file=src/main.ts
 
 ## Installation
 
 ```bash
-pnpm install -D trap-focus-svelte
+pnpm install trap-focus-svelte
 ```
 
 ## Options
 
-ADD OPTIONS INFO (active, wrap)
+ADD OPTIONS INFO
 
 ## Usage with Svelte
 
