@@ -41,9 +41,6 @@
 			]
 		}
 	},
-	"mangle": {
-		"regex": "^lastActiveElement$"
-	},
 	"scripts": {
 		"build": "run-p build-cjs build-module build-svelte && sed -i 's/Promise.resolve();//' dist/*",
 		"build-cjs": "microbundle -i index.ts -o ./dist/trap-focus-svelte.cjs.js --no-pkg-main -f cjs --sourcemap false",
