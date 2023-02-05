@@ -30,6 +30,17 @@
 		"./vanilla": "./dist/trap-focus-svelte.mjs"
 	},
 	"svelte": "./dist/trap-focus-svelte.svelte.js",
+	"types": "dist/index.d.ts",
+	"typesVersions": {
+		"*": {
+			"vanilla": [
+				"dist/index.d.ts"
+			],
+			"svelte": [
+				"dist/index.d.ts"
+			]
+		}
+	},
 	"mangle": {
 		"regex": "^lastActiveElement$"
 	},
