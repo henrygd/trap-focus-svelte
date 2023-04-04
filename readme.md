@@ -76,7 +76,7 @@ For an example of the demo site made without Svelte (with TypeScript / Vite) see
 ```js
 import { trapFocus } from 'trap-focus-svelte/vanilla'
 
-const div = document.getElementById('buttons')
+const buttons = document.getElementById('buttons')
 
 // create trap (pass false as a second argument to start disabled)
 const buttonTrap = trapFocus(buttons)
