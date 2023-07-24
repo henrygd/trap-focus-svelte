@@ -2,13 +2,18 @@ import { listen } from 'svelte/internal'
 
 let stack: HTMLElement[] = []
 
-// true if tabbing backwards with shift + tab
-let shiftTab = false
-
-listen(document, 'keydown', (e: KeyboardEvent) => (shiftTab = e.shiftKey && e.key == 'Tab'))
-
 /** Traps focus within a wrapper element */
 function trapFocus(wrap: HTMLElement, active = true) {
+	// true if tabbing backwards with shift + tab
+	let shiftTab = false
+
+	// set shiftTab to true if shift + tab is pressed
+	const shiftTabListener = listen(
+		document,
+		'keydown',
+		(e: KeyboardEvent) => (shiftTab = e.shiftKey && e.key == 'Tab')
+	)
+
 	// return  the first and last focusable children
 	function getFirstAndLastFocusable() {
 		const els = [...wrap.querySelectorAll('*')].filter(
@@ -72,6 +77,7 @@ function trapFocus(wrap: HTMLElement, active = true) {
 		},
 		/** Destroys trap and removes event listeners */
 		destroy() {
+			shiftTabListener()
 			focusListener()
 			focusOutListener()
 			removeFromStack()
