@@ -1,14 +1,10 @@
-function listen(
-	node: EventTarget,
-	event: string,
-	handler: EventListenerOrEventListenerObject,
-	options?: boolean | AddEventListenerOptions | EventListenerOptions
-) {
-	node.addEventListener(event, handler, options)
-	return () => node.removeEventListener(event, handler, options)
-}
-
 let stack: HTMLElement[] = []
+
+/** adds event listener to node and returns function that removes the listener */
+function listen(node: Node, event: string, handler: EventListenerOrEventListenerObject) {
+	node.addEventListener(event, handler)
+	return () => node.removeEventListener(event, handler)
+}
 
 /** Traps focus within a wrapper element */
 function trapFocus(wrap: HTMLElement, active = true) {
