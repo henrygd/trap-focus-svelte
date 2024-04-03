@@ -1,5 +1,3 @@
-import { listen } from 'svelte/internal'
-
 let stack: HTMLElement[] = []
 
 /** Traps focus within a wrapper element */
@@ -7,18 +5,10 @@ function trapFocus(wrap: HTMLElement, active = true) {
 	// true if tabbing backwards with shift + tab
 	let shiftTab = false
 
-	// set shiftTab to true if shift + tab is pressed
-	const shiftTabListener = listen(
-		document,
-		'keydown',
-		(e: KeyboardEvent) => (shiftTab = e.shiftKey && e.key == 'Tab')
-	)
-
 	// return  the first and last focusable children
 	function getFirstAndLastFocusable() {
-		const els = [...wrap.querySelectorAll('*')].filter(
-			(element: HTMLElement) => element.tabIndex >= 0
-		)
+		const elements: HTMLElement[] = Array.from(wrap.querySelectorAll('*'))
+		const els = elements.filter((element: HTMLElement) => element.tabIndex >= 0)
 		return [els.at(0) ?? wrap, els.at(-1) ?? wrap] as HTMLElement[]
 	}
 
@@ -29,7 +19,7 @@ function trapFocus(wrap: HTMLElement, active = true) {
 	function addToStack() {
 		stack.push(wrap)
 		lastActiveElement = document.activeElement as HTMLElement
-		getFirstAndLastFocusable().at(0).focus()
+		getFirstAndLastFocusable().at(0)?.focus()
 	}
 	/** deactivates trap (removes from stack) and restores focus to lastActiveElement */
 	function removeFromStack() {
@@ -46,7 +36,7 @@ function trapFocus(wrap: HTMLElement, active = true) {
 	const inCurrentTrap = (el: HTMLElement) => stack.at(-1)?.contains(el)
 
 	/** loop focus if leaving first of last focusable element in wrap */
-	const focusOutListener = listen(wrap, 'focusout', (e: FocusEvent) => {
+	const focusOutListener = (e: FocusEvent) => {
 		if (inCurrentTrap(wrap)) {
 			const [firstFocusableEl, lastFocusableEl] = getFirstAndLastFocusable()
 			if (e.target == firstFocusableEl && shiftTab) {
@@ -55,16 +45,23 @@ function trapFocus(wrap: HTMLElement, active = true) {
 				firstFocusableEl.focus()
 			}
 		}
-	})
+	}
 
 	/** moves focus back to wrap if something outside the wrap is focused */
-	const focusListener = listen(document, 'focusin', (e: FocusEvent) => {
+	const focusListener = (e: FocusEvent) => {
 		if (inCurrentTrap(wrap) && !inCurrentTrap(e.target as HTMLElement)) {
 			const [first, last] = getFirstAndLastFocusable()
-			let focusEl = shiftTab ? last : first
+			const focusEl = shiftTab ? last : first
 			focusEl.focus()
 		}
-	})
+	}
+	// set shiftTab to true if shift + tab is pressed
+	const shiftTabListener = (e: KeyboardEvent) => (shiftTab = e.shiftKey && e.key == 'Tab')
+
+	document.addEventListener('keydown', shiftTabListener)
+
+	document.addEventListener('focusout', focusOutListener)
+	document.addEventListener('focusin', focusListener)
 
 	return {
 		/** Enables / disables trap */
@@ -77,10 +74,10 @@ function trapFocus(wrap: HTMLElement, active = true) {
 		},
 		/** Destroys trap and removes event listeners */
 		destroy() {
-			shiftTabListener()
-			focusListener()
-			focusOutListener()
 			removeFromStack()
+			document.removeEventListener('focusout', focusOutListener)
+			document.removeEventListener('focusin', focusListener)
+			document.removeEventListener('keydown', shiftTabListener)
 		},
 	}
 }
