@@ -1,6 +1,10 @@
-import { listen } from 'svelte/internal'
-
 let stack: HTMLElement[] = []
+
+/** adds event listener to node and returns function that removes the listener */
+function listen(node: Node, event: string, handler: EventListenerOrEventListenerObject) {
+	node.addEventListener(event, handler)
+	return () => node.removeEventListener(event, handler)
+}
 
 /** Traps focus within a wrapper element */
 function trapFocus(wrap: HTMLElement, active = true) {
