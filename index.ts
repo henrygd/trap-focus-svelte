@@ -53,12 +53,13 @@ function trapFocus(wrap: HTMLElement, active = true) {
 	const inCurrentTrap = (el: HTMLElement) => stack.at(-1)?.contains(el)
 
 	/** moves focus back to wrap if something outside the wrap is focused */
-	const focusOutListener = listen(document, 'focusin', (e: FocusEvent) => {
+	const focusInListener = listen(document, 'focusin', (e: FocusEvent) => {
 		// return if ths trap is not active
 		// return if focus is inside the trap
 		if (!inCurrentTrap(wrap) || inCurrentTrap(e.target as HTMLElement)) {
 			return
 		}
+		console.log('focusin', e.target, e.relatedTarget)
 		const [firstFocusable, lastFocusable] = getFirstAndLastFocusable()
 		const previousFocusable = e.relatedTarget as HTMLElement
 		// const isTab = e.timeStamp - tabTime < 50
@@ -99,7 +100,7 @@ function trapFocus(wrap: HTMLElement, active = true) {
 		/** Destroys trap and removes event listeners */
 		destroy() {
 			// shiftTabListener()
-			focusOutListener()
+			focusInListener()
 			// focusOutListener()
 			removeFromStack()
 		},

@@ -20,16 +20,19 @@
 
 <div class="modal-wrap" transition:fade use:exitOnEscapePress>
 	<dialog open in:fly={{ y: 14 }} out:fly={{ y: -14 }} use:trapFocus>
-		<button on:click={toggleDialog} class="close-btn" aria-label="close" title="close"
-			><svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000">
-				<path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-			</svg>
-		</button>
-		<img src="location.svg" alt="" />
-		<h2>Use location services?</h2>
-		<p>
-			In order to give directional instructions, we kindly ask you to turn on the location services.
-		</p>
+		<div>
+			<h2>Checkboxes</h2>
+			<ul>
+				{#each Array(70) as _, i}
+					<li>
+						<label for="checkbox{i + 1}">
+							<input type="checkbox" id="checkbox{i + 1}" />
+							<span>Checkbox {i + 1}</span>
+						</label>
+					</li>
+				{/each}
+			</ul>
+		</div>
 		<div>
 			<button class="btn" on:click={toggleDialog}>Close</button>
 			<button class="btn cta" on:click={toggleDialog}>Confirm</button>
@@ -52,6 +55,22 @@
 		overflow: auto;
 	}
 
+	label {
+		width: 100%;
+		display: flex;
+		align-items: center;
+		gap: 0.4em;
+		/* margin: 0.5em 0; */
+		padding: 0.2em 0;
+		border-radius: 0.3em;
+	}
+	label:hover {
+		background: #f9f9f9;
+	}
+	label:focus-within {
+		background: #f1f1f1;
+	}
+
 	dialog {
 		position: relative;
 		border-radius: 8px;
@@ -59,7 +78,17 @@
 		width: 400px;
 		background: #fff;
 		max-width: 96%;
+		height: 90%;
+		max-height: 600px;
+		overflow-y: scroll;
 		border: 0;
+		color: #000;
+		text-align: left;
+	}
+	dialog ul {
+		padding: 0;
+		list-style: none;
+		font-size: 1.1em;
 	}
 	img {
 		width: 78%;
@@ -83,7 +112,9 @@
 	}
 	.btn:focus {
 		outline: none;
-		box-shadow: 0 0 0 0.125rem #fff, 0 0 0 0.25rem #6d6b87;
+		box-shadow:
+			0 0 0 0.125rem #fff,
+			0 0 0 0.25rem #6d6b87;
 	}
 	.btn.cta {
 		background-color: #0066fe;
@@ -93,7 +124,9 @@
 		background-color: #1774ff;
 	}
 	.btn.cta:focus {
-		box-shadow: 0 0 0 0.125rem #fff, 0 0 0 0.25rem #0066fe;
+		box-shadow:
+			0 0 0 0.125rem #fff,
+			0 0 0 0.25rem #0066fe;
 	}
 	h2 {
 		margin: 0 0 12px;
@@ -107,7 +140,8 @@
 		line-height: 1.6;
 		margin: 0;
 	}
-	dialog div {
+	dialog div:last-child {
+		text-align: center;
 		display: flex;
 		justify-content: space-between;
 	}
@@ -126,13 +160,15 @@
 		transition: opacity 0.15s;
 	}
 
-	.close-btn:focus {
+	/* .close-btn:focus {
 		opacity: 0.7;
 		outline: none;
-		box-shadow: 0 0 0 0.125rem #fff, 0 0 0 0.25rem #000;
+		box-shadow:
+			0 0 0 0.125rem #fff,
+			0 0 0 0.25rem #000;
 	}
 
 	.close-btn:hover {
 		opacity: 1;
-	}
+	} */
 </style>
