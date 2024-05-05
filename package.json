@@ -24,7 +24,8 @@
 		".": {
 			"import": "./dist/trap-focus-svelte.svelte.js",
 			"require": "./dist/trap-focus-svelte.cjs",
-			"default": "./dist/trap-focus-svelte.svelte.js"
+			"default": "./dist/trap-focus-svelte.svelte.js",
+			"svelte": "./dist/trap-focus-svelte.svelte.js"
 		},
 		"./svelte": "./dist/trap-focus-svelte.svelte.js",
 		"./vanilla": "./dist/trap-focus-svelte.mjs"
