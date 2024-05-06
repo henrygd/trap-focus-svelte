@@ -1,6 +1,6 @@
 {
 	"name": "trap-focus-svelte",
-	"version": "1.1.0-rc2",
+	"version": "1.1.0-rc3",
 	"license": "MIT",
 	"description": "Small 0.4kB focus trap that supports stacking, toggling, and dynamic content. Compatible with any framework.",
 	"keywords": [
@@ -22,15 +22,15 @@
 	"source": "index.ts",
 	"exports": {
 		".": {
-			"import": "./dist/trap-focus-svelte.svelte.js",
+			"import": "./dist/trap-focus-svelte.mjs",
 			"require": "./dist/trap-focus-svelte.cjs",
-			"default": "./dist/trap-focus-svelte.svelte.js",
-			"svelte": "./dist/trap-focus-svelte.svelte.js"
+			"default": "./dist/trap-focus-svelte.mjs",
+			"svelte": "./dist/trap-focus-svelte.mjs",
+			"types": "./dist/index.d.ts"
 		},
-		"./svelte": "./dist/trap-focus-svelte.svelte.js",
+		"./svelte": "./dist/trap-focus-svelte.mjs",
 		"./vanilla": "./dist/trap-focus-svelte.mjs"
 	},
-	"svelte": "./dist/trap-focus-svelte.svelte.js",
 	"types": "dist/index.d.ts",
 	"typesVersions": {
 		"*": {

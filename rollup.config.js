@@ -18,15 +18,6 @@ export default [
 	{
 		input: 'index.ts',
 		output: {
-			file: 'dist/trap-focus-svelte.svelte.js',
-			format: 'esm',
-		},
-		external: ['svelte/internal'],
-		plugins: [typescript(), terser(terserOptions), size()],
-	},
-	{
-		input: 'index.ts',
-		output: {
 			file: 'dist/trap-focus-svelte.mjs',
 			format: 'esm',
 		},
