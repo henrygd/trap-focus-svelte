@@ -8,19 +8,6 @@ function listen(node: Node, event: string, handler: EventListenerOrEventListener
 
 /** Traps focus within a wrapper element */
 function trapFocus(wrap: HTMLElement, active = true) {
-	/** time when tab was last pressed */
-	// let tabTime: number
-	// /** true if shift key was pressed while tab was pressed */
-	// let shiftKey: boolean
-
-	// /** sets tabTime and shiftKey */
-	// const shiftTabListener = listen(document, 'keydown', (e: KeyboardEvent) => {
-	// 	if (e.code == 'Tab') {
-	// 		shiftKey = e.shiftKey
-	// 		tabTime = e.timeStamp
-	// 	}
-	// })
-
 	/** return the first and last focusable children */
 	function getFirstAndLastFocusable() {
 		const els = [...wrap.querySelectorAll('*')].filter(
@@ -59,10 +46,9 @@ function trapFocus(wrap: HTMLElement, active = true) {
 		if (!inCurrentTrap(wrap) || inCurrentTrap(e.target as HTMLElement)) {
 			return
 		}
-		console.log('focusin', e.target, e.relatedTarget)
+
 		const [firstFocusable, lastFocusable] = getFirstAndLastFocusable()
 		const previousFocusable = e.relatedTarget as HTMLElement
-		// const isTab = e.timeStamp - tabTime < 50
 
 		// if no previousFocusable, focus first focusable
 		// if previousFocusable is not in the trap, focus first focusable
@@ -72,19 +58,16 @@ function trapFocus(wrap: HTMLElement, active = true) {
 			!inCurrentTrap(previousFocusable) ||
 			previousFocusable === lastFocusable
 		) {
-			// console.log('last element and tab within time (but not shift tab) focus first element')
 			firstFocusable.focus()
 			return
 		}
 
 		// if first element and shift tab within time, focus last element
 		if (previousFocusable === firstFocusable || previousFocusable === wrap) {
-			// console.log('first element and shift tab within time, focus last element')
 			lastFocusable.focus()
 			return
 		}
 		// fall back to focus on previousFocusable (we made sure it was in current trap above)
-		// console.log('fall back to focus on relatedTarget')
 		previousFocusable.focus()
 	})
 

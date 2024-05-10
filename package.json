@@ -2,7 +2,7 @@
 	"name": "trap-focus-svelte",
 	"version": "1.1.0-rc3",
 	"license": "MIT",
-	"description": "Small 0.4kB focus trap that supports stacking, toggling, and dynamic content. Compatible with any framework.",
+	"description": "Tiny focus trap. Supports stacking, toggling, and dynamic content. Compatible with any framework. 360 bytes gzip.",
 	"keywords": [
 		"focus",
 		"focus trap",
