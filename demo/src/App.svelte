@@ -39,12 +39,10 @@
 		<a href="https://www.npmjs.com/package/trap-focus-svelte">
 			<img height="20" src="https://flat.badgen.net/npm/v/trap-focus-svelte?color=blue" alt="NPM" />
 		</a>
-		<a
-			href="https://github.com/henrygd/trap-focus-svelte/blob/main/dist/trap-focus-svelte.svelte.js"
-		>
+		<a href="https://github.com/henrygd/trap-focus-svelte/blob/main/dist/trap-focus-svelte.mjs">
 			<img
 				height="20"
-				src="https://flat.badgen.net/badgesize/gzip/henrygd/trap-focus-svelte/main/dist/trap-focus-svelte.svelte.js?color=green"
+				src="https://flat.badgen.net/badgesize/gzip/henrygd/trap-focus-svelte/main/dist/trap-focus-svelte.mjs?color=green"
 				alt="current library size"
 			/>
 		</a>
