@@ -1,6 +1,9 @@
 [npm-image]: https://flat.badgen.net/npm/v/trap-focus-svelte?color=blue
 [npm-url]: https://www.npmjs.com/package/trap-focus-svelte
-[size-image]: https://flat.badgen.net/badgesize/gzip/henrygd/trap-focus-svelte/main/dist/trap-focus-svelte.svelte.js?color=green
+
+<!-- [size-image]: https://flat.badgen.net/badgesize/gzip/henrygd/trap-focus-svelte/main/dist/trap-focus-svelte.svelte.js?color=green -->
+
+[size-image]: https://flat.badgen.net/static/gzip%20size/358%20bytes/green
 [license-image]: https://flat.badgen.net/github/license/henrygd/trap-focus-svelte?color=purple
 [license-url]: /license
 

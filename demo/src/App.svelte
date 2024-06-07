@@ -40,10 +40,15 @@
 			<img height="20" src="https://flat.badgen.net/npm/v/trap-focus-svelte?color=blue" alt="NPM" />
 		</a>
 		<a href="https://github.com/henrygd/trap-focus-svelte/blob/main/dist/trap-focus-svelte.mjs">
-			<img
+			<!-- <img
 				height="20"
 				src="https://flat.badgen.net/badgesize/gzip/henrygd/trap-focus-svelte/main/dist/trap-focus-svelte.mjs?color=green"
 				alt="current library size"
+			/> -->
+			<img
+				height="20"
+				src="https://flat.badgen.net/static/gzip%20size/358%20bytes/green"
+				alt="358 bytes"
 			/>
 		</a>
 		<a href="https://github.com/henrygd/trap-focus-svelte/blob/main/license">
